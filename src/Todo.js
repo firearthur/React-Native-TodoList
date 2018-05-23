@@ -4,11 +4,9 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    backgroundColor: '#888',
     padding: 20,
-    borderTop: 10,
+    marginTop: 20,
   },
   form: {
     flexDirection: 'row',
@@ -25,8 +23,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  todos: {
+    marginTop: 60,
+  },
+
+  todo: {
+    fontSize: 24,
+    marginBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
   },
 
 });
@@ -48,7 +56,7 @@ export default class Todo extends React.Component {
   }
 
   handleTouch() {
-    this.setState({ todos: [...this.state.todos, this.state.newTodo], newTodo: '' });
+    this.setState({ todos: [this.state.newTodo, ...this.state.todos], newTodo: '' });
     this.todoInput.blur();
   }
   render() {
@@ -60,7 +68,9 @@ export default class Todo extends React.Component {
             <Text style={styles.buttonText}>Tap</Text>
           </TouchableOpacity>
         </View>
-        {this.state.todos.map(todo => <Text key={todo} >{todo}</Text>)}
+        <View style={styles.todos}>
+          {this.state.todos.map(todo => <Text style={styles.todo} key={todo} >{todo}</Text>)}
+        </View>
       </View>
     );
   }
