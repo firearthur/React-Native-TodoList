@@ -4,10 +4,31 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'pink',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    padding: 20,
+    borderTop: 10,
   },
+  form: {
+    flexDirection: 'row',
+  },
+  input: {
+    flex: 0.7,
+  },
+  button: {
+    flex: 0.3,
+    borderWidth: 1,
+    borderColor: 'blue',
+    borderRadius: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+
 });
 
 export default class Todo extends React.Component {
@@ -33,11 +54,13 @@ export default class Todo extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.form}>
+          <TextInput style={styles.input} ref={input => (this.todoInput = input)} value={this.state.newTodo} onChangeText={this.handleChange} />
+          <TouchableOpacity style={styles.button} onPress={this.handleTouch}>
+            <Text style={styles.buttonText}>Tap</Text>
+          </TouchableOpacity>
+        </View>
         {this.state.todos.map(todo => <Text key={todo} >{todo}</Text>)}
-        <TextInput ref={input => (this.todoInput = input)} value={this.state.newTodo} onChangeText={this.handleChange} />
-        <TouchableOpacity onPress={this.handleTouch}>
-          <Text>Tap me </Text>
-        </TouchableOpacity>
       </View>
     );
   }
